@@ -17,8 +17,8 @@ import android.widget.ExpandableListView.OnGroupExpandListener;
 import android.widget.Toast;
 import android.app.AlertDialog;
 import android.view.LayoutInflater;
-import android.widget.TextView;
-import android.view.ViewGroup;
+import android.widget.ListView;
+
 
 public class MainActivity extends Activity {
 
@@ -84,13 +84,11 @@ public class MainActivity extends Activity {
 		expListView.setOnChildClickListener(new OnChildClickListener() {
 
 			@Override
-			public boolean onChildClick(ExpandableListView parent, View v,
-					int groupPosition, int childPosition, long id) {
-				// TODO Auto-generated method stub
-
+			public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
                 switch(groupPosition){
+                    // TODO Auto-generated method stub
                     case 0:
-                        switch(childPosition){
+                        switch(childPosition) {
                             case 0:
                                 LayoutInflater inflater = getLayoutInflater();
                                 final View dialoglayout = inflater.inflate(R.layout.numcell, null);
@@ -254,6 +252,7 @@ public class MainActivity extends Activity {
                                 EditText mysize_et = (EditText) dialoglayout_matrixsize.findViewById(R.id.mysize_id);
                                 mxsize_et.setText(String.valueOf(modelvars.matrix_x));
                                 mysize_et.setText(String.valueOf(modelvars.matrix_y));
+
                                 builder.setTitle("Edit");
                                 // set dialog message
                                 builder
@@ -267,6 +266,8 @@ public class MainActivity extends Activity {
                                                         modelvars.matrix_x = Double.parseDouble(mxsize_et.getText().toString());
                                                         EditText mysize_et = (EditText) dialoglayout_matrixsize.findViewById(R.id.mysize_id);
                                                         modelvars.matrix_y = Double.parseDouble(mysize_et.getText().toString());
+                                                        modelvars.ini_pos_x = modelvars.matrix_x / 2;
+                                                        modelvars.ini_pos_y = modelvars.matrix_y / 2;
                                                         dialog.cancel();
                                                     }
                                                 })
@@ -277,14 +278,90 @@ public class MainActivity extends Activity {
                                                         dialog.cancel();
                                                     }
                                                 });
+
                                 builder.show();
                                 break;
                             case 1:
+                                final CharSequence[] items = {"Center (defaults on matrix resize)", "Left center", "Custom"};
+                                builder = new AlertDialog.Builder(context);
+                                builder.setTitle("Select start location");
+                                builder.setItems(items, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int item) {
+                                        // Do something with the selection
+                                        if (item == 2) {
+                                            LayoutInflater inflater = getLayoutInflater();
+                                            final View dialoglayout_startloc = inflater.inflate(R.layout.startloc, null);
+                                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                                            builder.setView(dialoglayout_startloc);
+                                            EditText mxsize_et = (EditText) dialoglayout_startloc.findViewById(R.id.startx_id);
+                                            EditText mysize_et = (EditText) dialoglayout_startloc.findViewById(R.id.starty_id);
+                                            mxsize_et.setText(String.valueOf(modelvars.ini_pos_x));
+                                            mysize_et.setText(String.valueOf(modelvars.ini_pos_y));
+
+                                            builder.setTitle("Edit");
+                                            // set dialog message
+                                            builder
+                                                    .setMessage("Start position in " + modelvars.matrix_x +"X" + modelvars.matrix_y + " matrix")
+                                                    .setCancelable(false)
+                                                    .setPositiveButton("OK",
+                                                            new DialogInterface.OnClickListener() {
+                                                                public void onClick(DialogInterface dialog, int id) {
+                                                                    EditText mxsize_et = (EditText) dialoglayout_startloc.findViewById(R.id.starty_id);
+                                                                    EditText mysize_et = (EditText) dialoglayout_startloc.findViewById(R.id.starty_id);
+                                                                    double xx = Double.parseDouble(mxsize_et.getText().toString());
+                                                                    double yy = Double.parseDouble(mysize_et.getText().toString());
+                                                                    if((xx <= modelvars.matrix_x) && (yy <= modelvars.matrix_y)) {
+                                                                        modelvars.ini_pos_x = xx;
+                                                                        modelvars.ini_pos_y = yy;
+                                                                        modelvars.position_cells = 2;
+                                                                    }
+                                                                    dialog.cancel();
+                                                                }
+                                                            })
+                                                    .setNegativeButton("Cancel",
+                                                            new DialogInterface.OnClickListener() {
+                                                                public void onClick(DialogInterface dialog,
+                                                                                    int id) {
+                                                                    dialog.cancel();
+                                                                }
+                                                            });
+                                            builder.show();
+                                        }else if(item == 1){
+                                            modelvars.ini_pos_x = 0.1;
+                                            modelvars.ini_pos_y = modelvars.matrix_y / 2;
+                                            modelvars.position_cells = 1;
+                                        }else{
+                                            modelvars.ini_pos_x = modelvars.matrix_x / 2;
+                                            modelvars.ini_pos_y = modelvars.matrix_y / 2;
+                                            modelvars.position_cells = 0;
+                                        }
+                                        dialog.cancel();
+                                    }
+                                });
+                                builder.setPositiveButton("Cancel", null);
+                                AlertDialog alert = builder.create();
+                                alert.show();
                                 break;
                             case 2:
+                                final CharSequence[] items1 = {"Random (default)", "Down", "Left", "Up", "Right"};
+                                builder = new AlertDialog.Builder(context);
+                                builder.setTitle("Select cell orientation");
+                                builder.setItems(items1, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int item) {
+                                        // Do something with the selection
+                                        modelvars.orient_cells = Math.abs(item - 4);
+                                        dialog.cancel();
+                                    }
+                                });
+                                builder.setPositiveButton("Cancel", null);
+                                alert = builder.create();
+                                alert.show();
                                 break;
                         }
                         break;
+
+                    // TODO
+
                     case 2:
                         switch(childPosition) {
                             case 0:
@@ -442,4 +519,6 @@ public class MainActivity extends Activity {
         listDataChild.put(listDataHeader.get(4), networklist);
         listDataChild.put(listDataHeader.get(5), algolist);
 	}
+
+
 }
