@@ -93,8 +93,11 @@ public class MainActivity extends Activity {
                         switch(childPosition){
                             case 0:
                                 LayoutInflater inflater = getLayoutInflater();
-                                View dialoglayout = inflater.inflate(R.layout.numcell, null);
+                                final View dialoglayout = inflater.inflate(R.layout.numcell, null);
                                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                                builder.setView(dialoglayout);
+                                EditText numcell_et = (EditText) dialoglayout.findViewById(R.id.numcell_id);
+                                numcell_et.setText(String.valueOf(modelvars.n_cells));
                                 builder.setTitle("Edit");
                                 // set dialog message
                                 builder
@@ -104,36 +107,177 @@ public class MainActivity extends Activity {
                                                 new DialogInterface.OnClickListener() {
                                                     public void onClick(DialogInterface dialog,
                                                                         int id) {
-                                                        // if this button is clicked, close
-                                                        // current activity
-                                                        MainActivity.this.finish();
+                                                        EditText numcell_et = (EditText) dialoglayout.findViewById(R.id.numcell_id);
+                                                        modelvars.n_cells = Integer.parseInt(numcell_et.getText().toString());
+                                                        dialog.cancel();
                                                     }
                                                 })
                                         .setNegativeButton("Cancel",
                                                 new DialogInterface.OnClickListener() {
                                                     public void onClick(DialogInterface dialog,
                                                                         int id) {
-                                                        // if this button is clicked, just close
-                                                        // the dialog box and do nothing
                                                         dialog.cancel();
                                                     }
                                                 });
-                                builder.setView(dialoglayout);
                                 builder.show();
                                 break;
                             case 1:
+                                inflater = getLayoutInflater();
+                                final View dialoglayout_timesim = inflater.inflate(R.layout.timesim, null);
+                                builder = new AlertDialog.Builder(context);
+                                builder.setView(dialoglayout_timesim);
+                                EditText timesim_et = (EditText) dialoglayout_timesim.findViewById(R.id.timesim_id);
+                                timesim_et.setText(String.valueOf(modelvars.time_sim));
+                                builder.setTitle("Edit");
+                                // set dialog message
+                                builder
+                                        .setMessage("Change time of simulation (s)")
+                                        .setCancelable(false)
+                                        .setPositiveButton("OK",
+                                                new DialogInterface.OnClickListener() {
+                                                    public void onClick(DialogInterface dialog,
+                                                                        int id) {
+                                                        EditText timesim_et = (EditText) dialoglayout_timesim.findViewById(R.id.timesim_id);
+                                                        modelvars.time_sim = Double.parseDouble(timesim_et.getText().toString());
+                                                        dialog.cancel();
+                                                    }
+                                                })
+                                        .setNegativeButton("Cancel",
+                                                new DialogInterface.OnClickListener() {
+                                                    public void onClick(DialogInterface dialog,
+                                                                        int id) {
+                                                        dialog.cancel();
+                                                    }
+                                                });
+                                builder.show();
                                 break;
                             case 2:
+                                inflater = getLayoutInflater();
+                                final View dialoglayout_seed = inflater.inflate(R.layout.seednum, null);
+                                builder = new AlertDialog.Builder(context);
+                                builder.setView(dialoglayout_seed);
+                                EditText seednum_et = (EditText) dialoglayout_seed.findViewById(R.id.seednum_id);
+                                seednum_et.setText(String.valueOf(modelvars.rand_seed));
+                                builder.setTitle("Edit");
+                                // set dialog message
+                                builder
+                                        .setMessage("Change random seed number")
+                                        .setCancelable(false)
+                                        .setPositiveButton("OK",
+                                                new DialogInterface.OnClickListener() {
+                                                    public void onClick(DialogInterface dialog,
+                                                                        int id) {
+                                                        EditText seednum_et = (EditText) dialoglayout_seed.findViewById(R.id.seednum_id);
+                                                        modelvars.rand_seed = Integer.parseInt(seednum_et.getText().toString());
+                                                        dialog.cancel();
+                                                    }
+                                                })
+                                        .setNegativeButton("Cancel",
+                                                new DialogInterface.OnClickListener() {
+                                                    public void onClick(DialogInterface dialog,
+                                                                        int id) {
+                                                        dialog.cancel();
+                                                    }
+                                                });
+                                builder.show();
                                 break;
                             case 3:
+                                inflater = getLayoutInflater();
+                                final View dialoglayout_outavg = inflater.inflate(R.layout.outavg, null);
+                                builder = new AlertDialog.Builder(context);
+                                builder.setView(dialoglayout_outavg);
+                                EditText outavg_et = (EditText) dialoglayout_outavg.findViewById(R.id.outavg_id);
+                                outavg_et.setText(String.valueOf(modelvars.avgname));
+                                builder.setTitle("Edit");
+                                // set dialog message
+                                builder
+                                        .setMessage("Change averages output file name")
+                                        .setCancelable(false)
+                                        .setPositiveButton("OK",
+                                                new DialogInterface.OnClickListener() {
+                                                    public void onClick(DialogInterface dialog,
+                                                                        int id) {
+                                                        EditText outavg_et = (EditText) dialoglayout_outavg.findViewById(R.id.outavg_id);
+                                                        modelvars.avgname = outavg_et.getText().toString();
+                                                        dialog.cancel();
+                                                    }
+                                                })
+                                        .setNegativeButton("Cancel",
+                                                new DialogInterface.OnClickListener() {
+                                                    public void onClick(DialogInterface dialog,
+                                                                        int id) {
+                                                        dialog.cancel();
+                                                    }
+                                                });
+                                builder.show();
                                 break;
                             case 4:
+                                inflater = getLayoutInflater();
+                                final View dialoglayout_outfull = inflater.inflate(R.layout.outfull, null);
+                                builder = new AlertDialog.Builder(context);
+                                builder.setView(dialoglayout_outfull);
+                                EditText outfull_et = (EditText) dialoglayout_outfull.findViewById(R.id.outfull_id);
+                                outfull_et.setText(String.valueOf(modelvars.fullname));
+                                builder.setTitle("Edit");
+                                // set dialog message
+                                builder
+                                        .setMessage("Change full dataset output file name")
+                                        .setCancelable(false)
+                                        .setPositiveButton("OK",
+                                                new DialogInterface.OnClickListener() {
+                                                    public void onClick(DialogInterface dialog,
+                                                                        int id) {
+                                                        EditText outfull_et = (EditText) dialoglayout_outfull.findViewById(R.id.outfull_id);
+                                                        modelvars.avgname = outfull_et.getText().toString();
+                                                        dialog.cancel();
+                                                    }
+                                                })
+                                        .setNegativeButton("Cancel",
+                                                new DialogInterface.OnClickListener() {
+                                                    public void onClick(DialogInterface dialog,
+                                                                        int id) {
+                                                        dialog.cancel();
+                                                    }
+                                                });
+                                builder.show();
                                 break;
                         }
                         break;
                     case 1:
                         switch(childPosition) {
                             case 0:
+                                LayoutInflater inflater = getLayoutInflater();
+                                final View dialoglayout_matrixsize = inflater.inflate(R.layout.matrixsize, null);
+                                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                                builder.setView(dialoglayout_matrixsize);
+                                EditText mxsize_et = (EditText) dialoglayout_matrixsize.findViewById(R.id.mxsize_id);
+                                EditText mysize_et = (EditText) dialoglayout_matrixsize.findViewById(R.id.mysize_id);
+                                mxsize_et.setText(String.valueOf(modelvars.matrix_x));
+                                mysize_et.setText(String.valueOf(modelvars.matrix_y));
+                                builder.setTitle("Edit");
+                                // set dialog message
+                                builder
+                                        .setMessage("Change size of matrix")
+                                        .setCancelable(false)
+                                        .setPositiveButton("OK",
+                                                new DialogInterface.OnClickListener() {
+                                                    public void onClick(DialogInterface dialog,
+                                                                        int id) {
+                                                        EditText mxsize_et = (EditText) dialoglayout_matrixsize.findViewById(R.id.mxsize_id);
+                                                        modelvars.matrix_x = Double.parseDouble(mxsize_et.getText().toString());
+                                                        EditText mysize_et = (EditText) dialoglayout_matrixsize.findViewById(R.id.mysize_id);
+                                                        modelvars.matrix_y = Double.parseDouble(mysize_et.getText().toString());
+                                                        dialog.cancel();
+                                                    }
+                                                })
+                                        .setNegativeButton("Cancel",
+                                                new DialogInterface.OnClickListener() {
+                                                    public void onClick(DialogInterface dialog,
+                                                                        int id) {
+                                                        dialog.cancel();
+                                                    }
+                                                });
+                                builder.show();
                                 break;
                             case 1:
                                 break;
@@ -246,7 +390,7 @@ public class MainActivity extends Activity {
 		List<String> basiclist = new ArrayList<String>();
 		basiclist.add("Number of cells");
         basiclist.add("Time of simulation");
-        basiclist.add("Random seed numbers");
+        basiclist.add("Random seed number");
         basiclist.add("Output file - averages");
         basiclist.add("Output file - full dataset");
 
