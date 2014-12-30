@@ -17,11 +17,8 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="app: info.androidhive.expandablelistview" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f2020bec-1af3-4bac-ad4f-124ea7e47866" name="Default" comment="finished with onclick events up to grandient options">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/cellorient.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/startloc.xml" />
+    <list default="true" id="f2020bec-1af3-4bac-ad4f-124ea7e47866" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/info/androidhive/expandablelistview/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/info/androidhive/expandablelistview/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/info/androidhive/expandablelistview/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/info/androidhive/expandablelistview/R.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ExpandableListView.iws" />
@@ -61,8 +58,8 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/info/androidhive/expandablelistview/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.45518208" vertical-offset="4910" max-vertical-offset="7755">
-              <caret line="362" column="27" selection-start-line="362" selection-start-column="27" selection-end-line="362" selection-end-column="27" />
+            <state vertical-scroll-proportion="0.29007635" vertical-offset="4235" max-vertical-offset="7755">
+              <caret line="308" column="146" selection-start-line="308" selection-start-column="146" selection-end-line="308" selection-end-column="146" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2496#26213#0" expanded="true" />
@@ -1159,8 +1156,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="675" />
-    <option name="y" value="92" />
+    <option name="x" value="110" />
+    <option name="y" value="109" />
     <option name="width" value="2226" />
     <option name="height" value="1242" />
   </component>
@@ -1458,7 +1455,11 @@
       <created>1419965740727</created>
       <updated>1419965740727</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="finished with onclick events up to grandient options">
+      <created>1419981113640</created>
+      <updated>1419981113640</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TodoView" selected-index="2">
@@ -1482,7 +1483,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="675" y="92" width="2226" height="1242" extended-state="0" />
+    <frame x="110" y="109" width="2226" height="1242" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1497,8 +1498,8 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287858" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32636362" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32636362" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.38" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287858" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -2013,8 +2014,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/info/androidhive/expandablelistview/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.45518208" vertical-offset="4910" max-vertical-offset="7755">
-          <caret line="362" column="27" selection-start-line="362" selection-start-column="27" selection-end-line="362" selection-end-column="27" />
+        <state vertical-scroll-proportion="0.29007635" vertical-offset="4235" max-vertical-offset="7755">
+          <caret line="308" column="146" selection-start-line="308" selection-start-column="146" selection-end-line="308" selection-end-column="146" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#2496#26213#0" expanded="true" />

@@ -306,7 +306,7 @@ public class MainActivity extends Activity {
                                                     .setPositiveButton("OK",
                                                             new DialogInterface.OnClickListener() {
                                                                 public void onClick(DialogInterface dialog, int id) {
-                                                                    EditText mxsize_et = (EditText) dialoglayout_startloc.findViewById(R.id.starty_id);
+                                                                    EditText mxsize_et = (EditText) dialoglayout_startloc.findViewById(R.id.startx_id);
                                                                     EditText mysize_et = (EditText) dialoglayout_startloc.findViewById(R.id.starty_id);
                                                                     double xx = Double.parseDouble(mxsize_et.getText().toString());
                                                                     double yy = Double.parseDouble(mysize_et.getText().toString());
