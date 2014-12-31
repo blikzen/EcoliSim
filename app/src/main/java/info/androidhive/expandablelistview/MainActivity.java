@@ -18,7 +18,9 @@ import android.widget.Toast;
 import android.app.AlertDialog;
 import android.view.LayoutInflater;
 import java.util.Map;
-
+import android.widget.Button;
+import android.view.View.OnClickListener;
+import android.view.View;
 
 public class MainActivity extends Activity {
 
@@ -1007,38 +1009,193 @@ public class MainActivity extends Activity {
                                 builder.show();
                                 break;
                             case 5:
+                                inflater = getLayoutInflater();
+                                final View dialoglayout_kd = inflater.inflate(R.layout.receptor, null);
+                                builder = new AlertDialog.Builder(context);
+                                builder.setView(dialoglayout_kd);
+                                EditText tsof = (EditText) dialoglayout_kd.findViewById(R.id.tsroff_if);
+                                EditText tson = (EditText) dialoglayout_kd.findViewById(R.id.tsron_id);
+                                EditText taof = (EditText) dialoglayout_kd.findViewById(R.id.taroff_id);
+                                EditText taon = (EditText) dialoglayout_kd.findViewById(R.id.taron_id);
+                                tsof.setText(String.valueOf(modelvars.tsr_off));
+                                tson.setText(String.valueOf(modelvars.tsr_on));
+                                taof.setText(String.valueOf(modelvars.tar_off));
+                                taon.setText(String.valueOf(modelvars.tar_on));
+                                // set dialog message
+                                builder
+                                        .setMessage("Receptor Ligand KD-S (mM)")
+                                        .setCancelable(false)
+                                        .setPositiveButton("OK",
+                                                new DialogInterface.OnClickListener() {
+                                                    public void onClick(DialogInterface dialog, int id) {
+                                                        EditText tsof = (EditText) dialoglayout_kd.findViewById(R.id.tsroff_if);
+                                                        EditText tson = (EditText) dialoglayout_kd.findViewById(R.id.tsron_id);
+                                                        EditText taof = (EditText) dialoglayout_kd.findViewById(R.id.taroff_id);
+                                                        EditText taon = (EditText) dialoglayout_kd.findViewById(R.id.taron_id);
+                                                        modelvars.tsr_off = Double.parseDouble(tsof.getText().toString());
+                                                        modelvars.tsr_on = Double.parseDouble(tson.getText().toString());
+                                                        modelvars.tar_off = Double.parseDouble(taof.getText().toString());
+                                                        modelvars.tar_on = Double.parseDouble(taon.getText().toString());
+                                                        dialog.cancel();
+                                                    }
+                                                })
+                                        .setNegativeButton("Cancel",
+                                                new DialogInterface.OnClickListener() {
+                                                    public void onClick(DialogInterface dialog,
+                                                                        int id) {
+                                                        dialog.cancel();
+                                                    }
+                                                });
+
+                                builder.show();
                                 break;
                             case 6:
+                                inflater = getLayoutInflater();
+                                final View dialoglayout_cluster = inflater.inflate(R.layout.cluster, null);
+                                builder = new AlertDialog.Builder(context);
+                                builder.setView(dialoglayout_cluster);
+                                EditText tar = (EditText) dialoglayout_cluster.findViewById(R.id.ctar_id);
+                                EditText tsr = (EditText) dialoglayout_cluster.findViewById(R.id.ctsr_id);
+                                EditText methyl = (EditText) dialoglayout_cluster.findViewById(R.id.cmethyl_id);
+
+                                tar.setText(String.valueOf(modelvars.tar_num));
+                                tsr.setText(String.valueOf(modelvars.tsr_num));
+                                methyl.setText(String.valueOf(modelvars.ini_methyl));
+
+                                // set dialog message
+                                builder
+                                        .setMessage("Cluster composition")
+                                        .setCancelable(false)
+                                        .setPositiveButton("OK",
+                                                new DialogInterface.OnClickListener() {
+                                                    public void onClick(DialogInterface dialog, int id) {
+                                                        EditText tar = (EditText) dialoglayout_cluster.findViewById(R.id.ctar_id);
+                                                        EditText tsr = (EditText) dialoglayout_cluster.findViewById(R.id.ctsr_id);
+                                                        EditText methyl = (EditText) dialoglayout_cluster.findViewById(R.id.cmethyl_id);
+
+                                                        modelvars.tar_num = Integer.parseInt(tar.getText().toString());
+                                                        modelvars.tsr_num = Integer.parseInt(tsr.getText().toString());
+                                                        modelvars.ini_methyl = Double.parseDouble(methyl.getText().toString());
+
+                                                        dialog.cancel();
+                                                    }
+                                                })
+                                        .setNegativeButton("Cancel",
+                                                new DialogInterface.OnClickListener() {
+                                                    public void onClick(DialogInterface dialog,
+                                                                        int id) {
+                                                        dialog.cancel();
+                                                    }
+                                                });
+
+                                builder.show();
                                 break;
                         }
                         break;
                     case 5:
                         switch(childPosition) {
                             case 0:
+                                LayoutInflater inflater = getLayoutInflater();
+                                final View dialoglayout_int = inflater.inflate(R.layout.integration, null);
+                                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                                builder.setView(dialoglayout_int);
+                                EditText int_et = (EditText) dialoglayout_int.findViewById(R.id.integrate_id);
+                                int_et.setText(String.valueOf(modelvars.integration_rate));
+                                // set dialog message
+                                builder
+                                        .setMessage("Integration dt, s")
+                                        .setCancelable(false)
+                                        .setPositiveButton("OK",
+                                                new DialogInterface.OnClickListener() {
+                                                    public void onClick(DialogInterface dialog,
+                                                                        int id) {
+                                                        EditText int_et = (EditText) dialoglayout_int.findViewById(R.id.integrate_id);
+                                                        modelvars.integration_rate = Double.parseDouble(int_et.getText().toString());
+                                                        dialog.cancel();
+                                                    }
+                                                })
+                                        .setNegativeButton("Cancel",
+                                                new DialogInterface.OnClickListener() {
+                                                    public void onClick(DialogInterface dialog,
+                                                                        int id) {
+                                                        dialog.cancel();
+                                                    }
+                                                });
+                                builder.show();
                                 break;
                             case 1:
+                                final Map<Integer, String> currentsel1 = new HashMap<Integer, String>();
+                                currentsel1.put(0, "Isotropic");
+                                currentsel1.put(1, "Anisotropic");
+                                final CharSequence[] items1 = {"Isotropic","Anisotropic"};
+                                builder = new AlertDialog.Builder(context);
+                                builder.setTitle("Select tumble model\n\tCurrent selection is: " + currentsel1.get(modelvars.tumble_select));
+                                builder.setItems(items1, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int item) {
+                                        // Do something with the selection
+                                        modelvars.tumble_select = item;
+                                        dialog.cancel();
+                                    }
+                                });
+                                builder.setPositiveButton("Cancel", null);
+                                AlertDialog alert = builder.create();
+                                alert.show();
                                 break;
                             case 2:
+                                final Map<Integer, String> currentsel2 = new HashMap<Integer, String>();
+                                currentsel2.put(0, "Voting motors");
+                                currentsel2.put(1, "Distortion factor");
+                                final CharSequence[] items2 = {"Voting motors","Distortion factor"};
+                                builder = new AlertDialog.Builder(context);
+                                builder.setTitle("Select run model\n\tCurrent selection is: " + currentsel2.get(modelvars.run_select));
+                                builder.setItems(items2, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int item) {
+                                        // Do something with the selection
+                                        modelvars.run_select = item;
+                                        dialog.cancel();
+                                    }
+                                });
+                                builder.setPositiveButton("Cancel", null);
+                                alert = builder.create();
+                                alert.show();
                                 break;
                             case 3:
+                                final Map<Integer, String> currentsel3 = new HashMap<Integer, String>();
+                                currentsel3.put(0, "T_ccw(CheYp), T_cw is constant");
+                                currentsel3.put(1, "T_ccw(CheYp) and T_cw(CheYp)");
+                                final CharSequence[] items3 = {"T_ccw(CheYp), T_cw is constant","T_ccw(CheYp) and T_cw(CheYp)"};
+                                builder = new AlertDialog.Builder(context);
+                                builder.setTitle("Select motor model\n\tCurrent selection is: " + currentsel3.get(modelvars.motor_select));
+                                builder.setItems(items3, new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int item) {
+                                        // Do something with the selection
+                                        modelvars.motor_select = item;
+                                        dialog.cancel();
+                                    }
+                                });
+                                builder.setPositiveButton("Cancel", null);
+                                alert = builder.create();
+                                alert.show();
                                 break;
                         }
                         break;
                 }
-                /*Toast.makeText(
-						getApplicationContext(),
-						groupPosition + " " + childPosition
-								+ " : "
-								+ listDataChild.get(
-										listDataHeader.get(groupPosition)).get(
-										childPosition), Toast.LENGTH_SHORT)
-						.show();*/
 				return false;
 			}
 		});
-	}
 
-	/*
+        final Button button = (Button) findViewById(R.id.reset_id);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                modelvars resetobject = new modelvars();
+                resetobject.reset();
+            }
+        });
+
+    }
+
+
+    /*
 	 * Preparing the list data
 	 */
 	private void prepareListData() {
