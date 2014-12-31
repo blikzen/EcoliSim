@@ -18,13 +18,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f2020bec-1af3-4bac-ad4f-124ea7e47866" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/cluster.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/integration.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/receptor.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/info/androidhive/expandablelistview/Cell.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/info/androidhive/expandablelistview/Cell2D.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/info/androidhive/expandablelistview/Global.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/info/androidhive/expandablelistview/MersenneTwister.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/info/androidhive/expandablelistview/Model.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/info/androidhive/expandablelistview/Motor.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/info/androidhive/expandablelistview/Network.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/info/androidhive/expandablelistview/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/info/androidhive/expandablelistview/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/info/androidhive/expandablelistview/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/info/androidhive/expandablelistview/R.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/precision.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/precision.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/info/androidhive/expandablelistview/modelvars.java" afterPath="$PROJECT_DIR$/app/src/main/java/info/androidhive/expandablelistview/modelvars.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ExpandableListView.iws" />
@@ -48,11 +51,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="activity_main.xml" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="activity_main.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.1468254" vertical-offset="429" max-vertical-offset="1200">
-              <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+            <state vertical-scroll-proportion="-42.115383" vertical-offset="0" max-vertical-offset="1200">
+              <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -64,8 +67,8 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/info/androidhive/expandablelistview/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-18.037037" vertical-offset="16328" max-vertical-offset="18030">
-              <caret line="1195" column="0" selection-start-line="1195" selection-start-column="0" selection-end-line="1195" selection-end-column="0" />
+            <state vertical-scroll-proportion="-9.148149" vertical-offset="16613" max-vertical-offset="18150">
+              <caret line="1198" column="0" selection-start-line="1198" selection-start-column="0" selection-end-line="1198" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1549#1719#0" expanded="true" />
@@ -159,24 +162,13 @@
                 <element signature="e#85603#86009#0" expanded="true" />
                 <element signature="e#85974#85975#0" expanded="true" />
                 <element signature="e#86326#86327#0" expanded="true" />
-                <element signature="e#86437#86625#0" expanded="true" />
-                <element signature="e#86614#86615#0" expanded="true" />
-                <element signature="e#87586#87594#0" expanded="true" />
+                <element signature="e#86449#86637#0" expanded="true" />
+                <element signature="e#86626#86627#0" expanded="true" />
+                <element signature="e#86750#86933#0" expanded="true" />
+                <element signature="e#86922#86923#0" expanded="true" />
+                <element signature="e#87894#87902#0" expanded="true" />
               </folding>
             </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="receptor.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/receptor.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.884615" vertical-offset="1284" max-vertical-offset="2040">
-              <caret line="101" column="8" selection-start-line="101" selection-start-column="8" selection-end-line="127" selection-end-column="23" />
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer">
-            <state />
           </provider>
         </entry>
       </file>
@@ -229,6 +221,26 @@
           </provider>
           <provider editor-type-id="android-designer">
             <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="modelvars.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/info/androidhive/expandablelistview/modelvars.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1856" max-vertical-offset="2625">
+              <caret line="162" column="0" selection-start-line="162" selection-start-column="0" selection-end-line="162" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Model.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/info/androidhive/expandablelistview/Model.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.48894668" vertical-offset="2054" max-vertical-offset="7275">
+              <caret line="166" column="79" selection-start-line="166" selection-start-column="79" selection-end-line="166" selection-end-column="79" />
+              <folding />
+            </state>
           </provider>
         </entry>
       </file>
@@ -1187,7 +1199,6 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/app/src/main/java/info/androidhive/expandablelistview/ExpandableListAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/info/androidhive/expandablelistview/modelvars.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/list_item.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/list_group.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/matrixsize.xml" />
@@ -1217,14 +1228,17 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/receptor.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/cluster.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/integration.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/info/androidhive/expandablelistview/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/info/androidhive/expandablelistview/Run.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/info/androidhive/expandablelistview/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/info/androidhive/expandablelistview/modelvars.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/info/androidhive/expandablelistview/Model.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="47" />
-    <option name="y" value="26" />
+    <option name="x" value="972" />
+    <option name="y" value="32" />
     <option name="width" value="1441" />
     <option name="height" value="1368" />
   </component>
@@ -1347,6 +1361,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/src/main/java/info/androidhive/expandablelistview" />
       <recent name="$PROJECT_DIR$/app/src/main/res/layout" />
     </key>
   </component>
@@ -1534,7 +1549,11 @@
       <created>1420060209823</created>
       <updated>1420060209823</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="finished expandablelists, and working onclick button function">
+      <created>1420065077657</created>
+      <updated>1420065077657</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TodoView" selected-index="2">
@@ -1558,7 +1577,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="47" y="26" width="1441" height="1368" extended-state="0" />
+    <frame x="972" y="32" width="1441" height="1368" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1610,7 +1629,8 @@
     <MESSAGE value="just testing" />
     <MESSAGE value="finished with onclick events up to grandient options" />
     <MESSAGE value="work save" />
-    <option name="LAST_COMMIT_MESSAGE" value="work save" />
+    <MESSAGE value="finished expandablelists, and working onclick button function" />
+    <option name="LAST_COMMIT_MESSAGE" value="finished expandablelists, and working onclick button function" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1744,9 +1764,11 @@
             <element signature="e#85603#86009#0" expanded="true" />
             <element signature="e#85974#85975#0" expanded="true" />
             <element signature="e#86326#86327#0" expanded="true" />
-            <element signature="e#86437#86625#0" expanded="true" />
-            <element signature="e#86614#86615#0" expanded="true" />
-            <element signature="e#87586#87594#0" expanded="true" />
+            <element signature="e#86449#86637#0" expanded="true" />
+            <element signature="e#86626#86627#0" expanded="true" />
+            <element signature="e#86750#86933#0" expanded="true" />
+            <element signature="e#86922#86923#0" expanded="true" />
+            <element signature="e#87894#87902#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1912,9 +1934,11 @@
             <element signature="e#85603#86009#0" expanded="true" />
             <element signature="e#85974#85975#0" expanded="true" />
             <element signature="e#86326#86327#0" expanded="true" />
-            <element signature="e#86437#86625#0" expanded="true" />
-            <element signature="e#86614#86615#0" expanded="true" />
-            <element signature="e#87586#87594#0" expanded="true" />
+            <element signature="e#86449#86637#0" expanded="true" />
+            <element signature="e#86626#86627#0" expanded="true" />
+            <element signature="e#86750#86933#0" expanded="true" />
+            <element signature="e#86922#86923#0" expanded="true" />
+            <element signature="e#87894#87902#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2159,14 +2183,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/info/androidhive/expandablelistview/modelvars.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1965">
-          <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="7" selection-end-column="80" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/cher.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-5.769231" vertical-offset="135" max-vertical-offset="1080">
@@ -2277,10 +2293,29 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-42.115383" vertical-offset="0" max-vertical-offset="1200">
+          <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/info/androidhive/expandablelistview/modelvars.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1856" max-vertical-offset="2625">
+          <caret line="162" column="0" selection-start-line="162" selection-start-column="0" selection-end-line="162" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/info/androidhive/expandablelistview/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-18.037037" vertical-offset="16328" max-vertical-offset="18030">
-          <caret line="1195" column="0" selection-start-line="1195" selection-start-column="0" selection-end-line="1195" selection-end-column="0" />
+        <state vertical-scroll-proportion="-9.148149" vertical-offset="16613" max-vertical-offset="18150">
+          <caret line="1198" column="0" selection-start-line="1198" selection-start-column="0" selection-end-line="1198" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1549#1719#0" expanded="true" />
@@ -2374,22 +2409,21 @@
             <element signature="e#85603#86009#0" expanded="true" />
             <element signature="e#85974#85975#0" expanded="true" />
             <element signature="e#86326#86327#0" expanded="true" />
-            <element signature="e#86437#86625#0" expanded="true" />
-            <element signature="e#86614#86615#0" expanded="true" />
-            <element signature="e#87586#87594#0" expanded="true" />
+            <element signature="e#86449#86637#0" expanded="true" />
+            <element signature="e#86626#86627#0" expanded="true" />
+            <element signature="e#86750#86933#0" expanded="true" />
+            <element signature="e#86922#86923#0" expanded="true" />
+            <element signature="e#87894#87902#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/info/androidhive/expandablelistview/Model.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.1468254" vertical-offset="429" max-vertical-offset="1200">
-          <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.48894668" vertical-offset="2054" max-vertical-offset="7275">
+          <caret line="166" column="79" selection-start-line="166" selection-start-column="79" selection-end-line="166" selection-end-column="79" />
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
   </component>

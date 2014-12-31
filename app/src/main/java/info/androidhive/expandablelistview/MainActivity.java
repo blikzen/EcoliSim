@@ -1184,11 +1184,19 @@ public class MainActivity extends Activity {
 			}
 		});
 
-        final Button button = (Button) findViewById(R.id.reset_id);
-        button.setOnClickListener(new View.OnClickListener() {
+        final Button reset_button = (Button) findViewById(R.id.reset_id);
+        reset_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 modelvars resetobject = new modelvars();
                 resetobject.reset();
+            }
+        });
+
+        final Button run_button = (Button) findViewById(R.id.runb_id);
+        run_button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                modelvars passrun = new modelvars();
+                passrun.passvars();
             }
         });
 
