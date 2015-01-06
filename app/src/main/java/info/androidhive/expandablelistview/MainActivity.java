@@ -6,6 +6,11 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -14,13 +19,12 @@ import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.ExpandableListView.OnGroupCollapseListener;
 import android.widget.ExpandableListView.OnGroupExpandListener;
-import android.widget.Toast;
+import android.widget.LinearLayout;
 import android.app.AlertDialog;
 import android.view.LayoutInflater;
 import java.util.Map;
 import android.widget.Button;
-import android.view.View.OnClickListener;
-import android.view.View;
+
 
 public class MainActivity extends Activity {
 
@@ -1197,6 +1201,35 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 modelvars passrun = new modelvars();
                 passrun.passvars();
+
+                Paint paint = new Paint();
+                paint.setColor(Color.parseColor("#FFFFFF"));
+
+                LinearLayout ll = (LinearLayout) findViewById(R.id.canmap);
+                int llheight = ll.getHeight();
+                int llwidth = ll.getWidth();
+                Float flheight = new Float(llheight);
+                Float flwidth = new Float(llwidth);
+
+                int timehold = (int) Math.round(modelvars.time_sim);
+
+                Bitmap bg = Bitmap.createBitmap(llheight, llwidth, Bitmap.Config.ARGB_8888);
+                Canvas canvas = new Canvas(bg);
+
+                for (int i = 0; i < modelvars.n_cells; i++){
+                    for (int y = 0; y < timehold-1; y++){
+                        float mysize = (float) modelvars.matrix_y;
+                        float mxsize = (float) modelvars.matrix_x;
+                        int holder = i + (y * modelvars.n_cells);
+                        int holder2 = i + ((y+2) * modelvars.n_cells);
+                        float firstx = (modelvars.cellxpositions.get(holder).floatValue() / mxsize) * flheight;
+                        float firsty = (modelvars.cellypositions.get(holder).floatValue() / mysize) * flwidth;
+                        float secondx = (modelvars.cellxpositions.get(holder2).floatValue() / mxsize) * flheight;
+                        float secondy = (modelvars.cellypositions.get(holder2).floatValue() / mysize) * flwidth;
+                        canvas.drawLine(firstx,firsty,secondx,secondy,paint);
+                    }
+                }
+                ll.setBackgroundDrawable(new BitmapDrawable(bg));
             }
         });
 

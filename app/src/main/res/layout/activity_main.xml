@@ -32,7 +32,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:id="@+id/canmap">
             </LinearLayout>
 
             <LinearLayout
@@ -45,18 +46,6 @@
                     android:id="@+id/reset_id"
                     android:text="Reset"
                     android:shadowColor="#FFFFFF"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"/>
-                <Button
-                    android:id="@+id/loadb_id"
-                    android:text="Load"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"/>
-                <Button
-                    android:id="@+id/saveb_id"
-                    android:text="Save"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"/>

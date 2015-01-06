@@ -68,160 +68,94 @@ public class Model {
 	}
 
 	public void runModel() throws InterruptedException {
-		exectime= System.currentTimeMillis();
-        try {
-            outputStream = new BufferedWriter(new FileWriter(ffull));
-            outputStreamAvg = new BufferedWriter(new FileWriter(fave));
-        } catch (Exception e) {
-        	System.out.println("Can not open out-files!" + e.getMessage());
-          };
-        	//Network.setDissConstants(1.7e-3, 12e-3, 100, 1e+6); // Aspartate binding constants
-        	//Network.setDissConstants(0.02, 0.5, 100, 1e+6);  //  MeAsp  binding constants
+
+        int timesimhold = (int) modelvars.time_sim;
+
 		long nsteps=Math.round(Tmax/dt);//number of time steps
 		long tsliceInterval=Math.round(outputDt/dt);//number of steps between output points
 		double xprev, yprev, xnext, ynext, Snext;
 // Iterations loop starts:
-	for(int iter=0;iter<Niter;iter++){
-		createCells(Ncells);
+	for(int iter=0;iter<Niter;iter++) {
+        createCells(Ncells);
 // Run the cells from t=0 till t=Tmax:
-		for(int i=0;i<nsteps;i++){
-			//if(i%100==0) {System.out.print(progressSymbols[ progressCycle ] + "\b" ); progressCycle = ( progressCycle + 1 ) & 3;	}
-			if(!myThread.isInterrupted()){// listen if the STOP button is pressed
-			for(int j=0;j<Ncells;j++){
-				xprev=arrCells[j].getPositionX(); 
-				yprev=arrCells[j].getPositionY();
-				xnext=xprev+arrCells[j].cellVelocity*dt*Math.cos(arrCells[j].getOrientation()); 
-				ynext=yprev+arrCells[j].cellVelocity*dt*Math.sin(arrCells[j].getOrientation());
+        for (int i = 0; i < nsteps; i++) {
+            //if(i%100==0) {System.out.print(progressSymbols[ progressCycle ] + "\b" ); progressCycle = ( progressCycle + 1 ) & 3;	}
+            if (!myThread.isInterrupted()) {// listen if the STOP button is pressed
+                for (int j = 0; j < Ncells; j++) {
+                    xprev = arrCells[j].getPositionX();
+                    yprev = arrCells[j].getPositionY();
+                    xnext = xprev + arrCells[j].cellVelocity * dt * Math.cos(arrCells[j].getOrientation());
+                    ynext = yprev + arrCells[j].cellVelocity * dt * Math.sin(arrCells[j].getOrientation());
 //				Test boundary conditions:
-				boolean cellReachedWall=reachedBoundary(arrCells[j], xprev, xnext, yprev, ynext, boundaryCondition);
+                    boolean cellReachedWall = reachedBoundary(arrCells[j], xprev, xnext, yprev, ynext, boundaryCondition);
 //				Normal behavior (inside the domain):
-				if(!cellReachedWall) 
-				{
-					Snext=SField(xnext,ynext,i*dt,gradientShape); 
-					arrCells[j].chemotaxisNetwork.updateMWCmodel(Snext);
-					// RUN state:
-					if(arrCells[j].RunTumbleState==Cell.Run) { // If the cell runs
-						arrCells[j].addRunInterval();
-						arrCells[j].addRotDiffusion();
-						if(medium==1){
-							tryStop(arrCells[j]);// Simulation of agar traps, exponentially distributed through time
-						}
-						if(arrCells[j].RunTumbleState!=Cell.Stop) // works for both medium=0,1
-						{
-							boolean startTumble;
-							if(runModel==0) startTumble=tryTumbleVoting(arrCells[j]); //voting model
-							else	startTumble=tryTumbleDistortionModel(arrCells[j]);//cw-distortion model
-							if(startTumble) {
-								double NMotorsCW=arrCells[j].getNMotorsCW();
-								double angle;
-								if(tumbleModel==0) angle=arrCells[j].tumble();// use System.out.print() to get the angle
-								else angle=arrCells[j].tumbleCWdependent(NMotorsCW);
-							};
-						}
-					}
-					//TUMBLE state:
-					else if(arrCells[j].RunTumbleState==Cell.Tumble) { //If the cell tumbles
-						arrCells[j].addTumbleInterval();
-						//voting model:
-						if (runModel==0){ 
-						xnext=xprev; ynext=yprev;
-						tryRunVoting(arrCells[j]);
-						}
-						//cw-distortion model:
-						else tryRunDistortionModel(arrCells[j]);
-					}
-					// STOP state (in agar only):
-					else if(arrCells[j].RunTumbleState==Cell.Stop) {
-						//voting model:
-						if (runModel==0){ 
-							xnext=xprev; ynext=yprev;
-							tryTumbleVoting(arrCells[j]);
-							}
-							//cw-distortion model:
-							else tryTumbleDistortionModel(arrCells[j]);
-					}
-					updateMotorStates(arrCells[j]); //update CW/CCW states of the motors.
-					arrCells[j].setPosition(xnext,ynext);// update cell position.	
-				}
-			} // end of cycle for(int j=0;j<Ncells;j++)
+                    if (!cellReachedWall) {
+                        Snext = SField(xnext, ynext, i * dt, gradientShape);
+                        arrCells[j].chemotaxisNetwork.updateMWCmodel(Snext);
+                        // RUN state:
+                        if (arrCells[j].RunTumbleState == Cell.Run) { // If the cell runs
+                            arrCells[j].addRunInterval();
+                            arrCells[j].addRotDiffusion();
+                            if (medium == 1) {
+                                tryStop(arrCells[j]);// Simulation of agar traps, exponentially distributed through time
+                            }
+                            if (arrCells[j].RunTumbleState != Cell.Stop) // works for both medium=0,1
+                            {
+                                boolean startTumble;
+                                if (runModel == 0)
+                                    startTumble = tryTumbleVoting(arrCells[j]); //voting model
+                                else
+                                    startTumble = tryTumbleDistortionModel(arrCells[j]);//cw-distortion model
+                                if (startTumble) {
+                                    double NMotorsCW = arrCells[j].getNMotorsCW();
+                                    double angle;
+                                    if (tumbleModel == 0)
+                                        angle = arrCells[j].tumble();// use System.out.print() to get the angle
+                                    else angle = arrCells[j].tumbleCWdependent(NMotorsCW);
+                                }
+                                ;
+                            }
+                        }
+                        //TUMBLE state:
+                        else if (arrCells[j].RunTumbleState == Cell.Tumble) { //If the cell tumbles
+                            arrCells[j].addTumbleInterval();
+                            //voting model:
+                            if (runModel == 0) {
+                                xnext = xprev;
+                                ynext = yprev;
+                                tryRunVoting(arrCells[j]);
+                            }
+                            //cw-distortion model:
+                            else tryRunDistortionModel(arrCells[j]);
+                        }
+                        // STOP state (in agar only):
+                        else if (arrCells[j].RunTumbleState == Cell.Stop) {
+                            //voting model:
+                            if (runModel == 0) {
+                                xnext = xprev;
+                                ynext = yprev;
+                                tryTumbleVoting(arrCells[j]);
+                            }
+                            //cw-distortion model:
+                            else tryTumbleDistortionModel(arrCells[j]);
+                        }
+                        updateMotorStates(arrCells[j]); //update CW/CCW states of the motors.
+                        arrCells[j].setPosition(xnext, ynext);// update cell position.
+                    }
+                } // end of cycle for(int j=0;j<Ncells;j++)
 
-			//Record the cells states:
-			if(((i%tsliceInterval)==0)||(i==nsteps-1))
-			{
-			double sumPositionX=0, sumPositionY=0, sumCheYp=0, sumOri=0, sumCheA=0, sumMeth=0, sumMb=0, 
-			sumSwFreq=0, sumRun=0, sumAttr=0, sumNmot=0, sumPon=0;
-
-    // TODO depreciate use of outputStream
-   // looks like all of the cell data is held in arrCells, so we can probably just run a class to pass these variables back to main
-
-			try {
-				outputStream.write(String.format("%3.2f\t", i*dt));// current time point
-				for(int j=0;j<Ncells;j++){		
-					if(flagOutX) outputStream.write(String.format("%2.4f\t", arrCells[j].getPositionX()));
-					if(flagOutY) outputStream.write(String.format("%2.4f\t", arrCells[j].getPositionY()));
-					if(flagOutOri) outputStream.write(String.format("%2.4f\t", arrCells[j].getOrientation()));
-					if(flagOutCheA) outputStream.write(String.format("%1.4f\t", arrCells[j].chemotaxisNetwork.cheAp));
-					if(flagOutCheY) outputStream.write(String.format("%1.4f\t", arrCells[j].chemotaxisNetwork.cheYp));
-					//outputStream.write(arrCells[j].chemotaxisNetwork.adaptRate+"\t");
-					if(flagOutMeth) outputStream.write(String.format("%1.4f\t", arrCells[j].chemotaxisNetwork.meth));
-					//outputStream.write(arrCells[j].chemotaxisNetwork.CheR+"\t");
-					//outputStream.write(arrCells[j].chemotaxisNetwork.CheBP+"\t");
-					if(flagOutMb) outputStream.write(String.format("%1.4f\t", arrCells[j].flagellarMotors[0].getMotorBias()));	
-					if(flagOutSwFreq) outputStream.write(String.format("%1.4f\t", arrCells[j].flagellarMotors[0].getCCWtoCWswitchFreq()));
-					if(flagOutNmot)	outputStream.write(String.format("%1.0f\t", arrCells[j].getNMotorsCW()));
-					if(flagOutRun)  outputStream.write(String.format("%1.0f\t", arrCells[j].RunTumbleState));
-					double xattr=arrCells[j].getPositionX();
-					double yattr=arrCells[j].getPositionY();
-					if(flagOutAttr){
-						outputStream.write(String.format("%1.6f\t", SField(xattr,yattr,i*dt,gradientShape)));
-					}
-					if(flagOutPon)  outputStream.write(String.format("%1.4f\t", arrCells[j].chemotaxisNetwork.P_on));
-					// Compute the average values:
-					sumPositionX+=arrCells[j].getPositionX();
-					sumPositionY+=arrCells[j].getPositionY();
-					sumCheYp+=arrCells[j].chemotaxisNetwork.cheYp;
-					sumOri+=arrCells[j].getOrientation();
-					sumCheA+=arrCells[j].chemotaxisNetwork.cheAp;
-					sumMeth+=arrCells[j].chemotaxisNetwork.meth;
-					sumMb+=arrCells[j].flagellarMotors[0].getMotorBias();
-					sumSwFreq+=arrCells[j].flagellarMotors[0].getCCWtoCWswitchFreq();
-					sumRun+=arrCells[j].RunTumbleState;
-					sumAttr+=SField(xattr,yattr,i*dt,gradientShape);
-					sumNmot+=arrCells[j].getNMotorsCW();
-					sumPon+=arrCells[j].chemotaxisNetwork.P_on;
-					}
-			outputStream.write("\n");
-			outputStreamAvg.write(String.format("%3.2f\t",i*dt));
-			if(flagOutX) outputStreamAvg.write(String.format("%2.4f\t",sumPositionX/Ncells));
-			if(flagOutY) outputStreamAvg.write(String.format("%2.4f\t",sumPositionY/Ncells));
-			if(flagOutOri) outputStreamAvg.write(String.format("%2.4f\t",sumOri/Ncells));
-			if(flagOutCheA) outputStreamAvg.write(String.format("%2.4f\t",sumCheA/Ncells));
-			if(flagOutCheY) outputStreamAvg.write(String.format("%2.4f\t",sumCheYp/Ncells));
-			if(flagOutMeth) outputStreamAvg.write(String.format("%2.4f\t",sumMeth/Ncells));
-			if(flagOutMb) outputStreamAvg.write(String.format("%2.4f\t",sumMb/Ncells));
-			if(flagOutSwFreq) outputStreamAvg.write(String.format("%2.4f\t",sumSwFreq/Ncells));
-			if(flagOutNmot) outputStreamAvg.write(String.format("%2.4f\t",sumNmot/Ncells));
-			if(flagOutRun) outputStreamAvg.write(String.format("%2.4f\t",sumRun/Ncells));
-			if(flagOutAttr) outputStreamAvg.write(String.format("%2.4f\t",sumAttr/Ncells));
-			if(flagOutPon) outputStreamAvg.write(String.format("%1.4f\t",sumPon/Ncells));
-			outputStreamAvg.write("\n");
-			}
-			catch (IOException e) {
-				System.out.println(e.getMessage());
-			};
-			}
-			}// end of if(!myThread.isInterrupted()){
-		}// END of i=(0..nsteps) time loop
-	}//END of "iter" loop 
-	
-	exectime= System.currentTimeMillis()-exectime;
-    try {
-		outputStream.close();
-		outputStreamAvg.close();
-	} catch (IOException e) {
-		System.out.println(e.getMessage());
-	}   
-	}// end of main()
+                //Record the cells states:
+                if (((i % tsliceInterval) == 0) || (i == nsteps - 1)) {
+                    for (int j = 0; j < Ncells; j++) {
+                            modelvars.cellxpositions.add(arrCells[j].getPositionX());
+                            modelvars.cellypositions.add(arrCells[j].getPositionY());
+                    }
+                }
+            }
+        }
+    }
+}
+// end of main()
 ////////////////////////////////////////////////////////
 ///////////////////FUNCTIONS////////////////////////////	
 ////////////////////////////////////////////////////////
