@@ -1221,11 +1221,11 @@ public class MainActivity extends Activity {
                         float mysize = (float) modelvars.matrix_y;
                         float mxsize = (float) modelvars.matrix_x;
                         int holder = i + (y * modelvars.n_cells);
-                        int holder2 = i + ((y+2) * modelvars.n_cells);
-                        float firstx = (modelvars.cellxpositions.get(holder).floatValue() / mxsize) * flheight;
-                        float firsty = (modelvars.cellypositions.get(holder).floatValue() / mysize) * flwidth;
-                        float secondx = (modelvars.cellxpositions.get(holder2).floatValue() / mxsize) * flheight;
-                        float secondy = (modelvars.cellypositions.get(holder2).floatValue() / mysize) * flwidth;
+                        int holder2 = i + ((y + 1) * modelvars.n_cells);
+                        float firstx = (1 - (modelvars.cellxpositions.get(holder).floatValue() / mxsize)) * flheight;
+                        float firsty = (1 - (modelvars.cellypositions.get(holder).floatValue() / mysize)) * flwidth;
+                        float secondx = (1 - (modelvars.cellxpositions.get(holder2).floatValue() / mxsize)) * flheight;
+                        float secondy = (1 - (modelvars.cellypositions.get(holder2).floatValue() / mysize)) * flwidth;
                         canvas.drawLine(firstx,firsty,secondx,secondy,paint);
                     }
                 }
