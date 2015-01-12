@@ -4,10 +4,19 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.provider.Settings;
 import android.widget.LinearLayout;
 import android.graphics.drawable.BitmapDrawable;
 import java.util.ArrayList;
 import java.util.List;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 
 public class modelvars {
 
@@ -89,6 +98,7 @@ public class modelvars {
     //public float getxarray(int holder){
       //  return Float.valueOf(cellxpositions.get(holder));
    // }
+
     public double ret_time_sim(){ return time_sim;}
     public double ret_matrix_x(){ return matrix_x;}
     public double ret_matrix_y(){ return matrix_y;}
@@ -140,50 +150,55 @@ public class modelvars {
     public String ret_avgname(){ return avgname;}
     public String ret_fullname(){ return fullname;}
 
-    public void passvars(){
+    public void passvars(Model Model1){
 
+            Model1.setNcells(n_cells);
+            Model1.setTmax(time_sim);
+            Model1.setLxLy(matrix_x,matrix_y);
+            Model1.setInitialCellDistribution(ini_pos_x,ini_pos_y,orient_cells);
+            Model1.setGradient(grad_select);
+            Model1.setStepGradientParams(step_val,add_step,rem_step);
+            Model1.setGradMinMaxVal(att_min,att_max);
+            Model1.setGradSourceXY(source_x,source_y);
+            Model1.setExpGradRate(att_rate);
+            Model1.setGradSigma(g_sigma);
+            Model1.setMedium(medium_num);
+            Model1.setOutputDt(att_max);
+            Model1.setOutFileNames(avgname,fullname);
+            Model1.setOutFlags(true,true,true,true,true,true,true,true,true,true,true,true);
+            Model1.setDt(att_max);
+            Model1.setRandSeed(rand_seed);
+            Cell2D.setRandSeed(rand_seed);
+            Network.setDissConstants(tar_off,tar_on,tsr_off,tsr_on);
+            Model1.setRunModel(run_select);
+            Model1.setTumbleModel(tumble_select);
+            Model1.setBoundaryCondition(bound_select);
+            Cell.setNmotors(n_motors);
+            Cell.setRotDiffusionCoeff(diff_const);
+            Cell.setMaxCellVelocity(1e-3*cell_velocity);
+            Motor.setMotorBias0(rest_rate,motor_select);
+            Model1.setAdaptRate(adapt_rate);
+            Network.setAdaptPrecision(0.01*precision);
+            Network.setRelativeCheRCheB(0.01*cher,0.01*cheb);
+            Network.setNreceptors(tar_num,tsr_num);
+            Network.setRelativeCheYCheZ(0.01*chey,0.01*chez);
+            Network.setIniMethState(ini_methyl);
+            Network.setRelativeCheA(0.01*chea);
+            Network.setRates(rcat,bcat,autophos,yphos,zphos);
 
-        Thread th1;
-        th1 = new Thread();
-        Model Model1 = new Model(th1);
-        Model1.setNcells(n_cells);
-        Model1.setTmax(time_sim);
-        Model1.setLxLy(time_sim,matrix_y);
-        Model1.setInitialCellDistribution(ini_pos_x, ini_pos_y,orient_cells);
-        Model1.setGradient(grad_select);
-        Model1.setStepGradientParams(step_val, add_step, rem_step);
-        Model1.setGradMinMaxVal(att_min, att_max);
-        Model1.setGradSourceXY(source_x, source_y);
-        Model1.setExpGradRate(att_rate);
-        Model1.setGradSigma(g_sigma);
-        Model1.setMedium(medium_num);
-        Model1.setOutputDt(att_max);
-        Model1.setOutFileNames(avgname, fullname);
-        Model1.setOutFlags(true, true, true, true, true, true, true, true, true, true, true, true);
-        Model1.setDt(att_max);
-        Model1.setRandSeed(rand_seed);
-        Cell2D.setRandSeed(rand_seed);
-        Network.setDissConstants(tar_off, tar_on, tsr_off, tsr_on);
-        Model1.setRunModel(run_select);
-        Model1.setTumbleModel(tumble_select);
-        Model1.setBoundaryCondition(bound_select);
-        Cell.setNmotors(n_motors);
-        Cell.setRotDiffusionCoeff(diff_const);
-        Cell.setMaxCellVelocity(1e-3*cell_velocity);
-        Motor.setMotorBias0(rest_rate,motor_select);
-        Model1.setAdaptRate(adapt_rate);
-        Network.setAdaptPrecision(0.01*precision);
-        Network.setRelativeCheRCheB(0.01*cher, 0.01*cheb);
-        Network.setNreceptors(tar_num, tsr_num);
-        Network.setRelativeCheYCheZ(0.01*chey, 0.01*chez);
-        Network.setIniMethState(ini_methyl);
-        Network.setRelativeCheA(0.01*chea);
-        Network.setRates(rcat, bcat, autophos, yphos, zphos);
-        try{
-            Model1.runModel();
-        }
-        catch (InterruptedException e) {
-            return;
-        }
+            try
+
+            {
+                Model1.runModel();
+            }
+
+            catch(
+            InterruptedException e
+            )
+
+            {
+                return;
+            }
+
     }
 }

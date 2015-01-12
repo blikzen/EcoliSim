@@ -274,6 +274,7 @@ public class MainActivity extends Activity {
                                                         EditText mysize_et = (EditText) dialoglayout_matrixsize.findViewById(R.id.mysize_id);
                                                         modelvars.matrix_x = Double.parseDouble(mxsize_et.getText().toString());
                                                         modelvars.matrix_y = Double.parseDouble(mysize_et.getText().toString());
+                                                        modelvars.position_cells = 0;
                                                         modelvars.ini_pos_x = modelvars.matrix_x / 2;
                                                         modelvars.ini_pos_y = modelvars.matrix_y / 2;
                                                         dialog.cancel();
@@ -735,7 +736,7 @@ public class MainActivity extends Activity {
                                                 new DialogInterface.OnClickListener() {
                                                     public void onClick(DialogInterface dialog,
                                                                         int id) {
-                                                        EditText diff_et = (EditText) dialoglayout_diff.findViewById(R.id.nmotors_id);
+                                                        EditText diff_et = (EditText) dialoglayout_diff.findViewById(R.id.diff_id);
                                                         modelvars.diff_const = Double.parseDouble(diff_et.getText().toString());
                                                         dialog.cancel();
                                                     }
@@ -1195,45 +1196,56 @@ public class MainActivity extends Activity {
                 resetobject.reset();
             }
         });
-
+        final Thread th1;
+        th1 = new Thread();{
         final Button run_button = (Button) findViewById(R.id.runb_id);
         run_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                modelvars passrun = new modelvars();
-                passrun.passvars();
 
-                Paint paint = new Paint();
-                paint.setColor(Color.parseColor("#FFFFFF"));
 
-                LinearLayout ll = (LinearLayout) findViewById(R.id.canmap);
-                int llheight = ll.getHeight();
-                int llwidth = ll.getWidth();
-                Float flheight = new Float(llheight);
-                Float flwidth = new Float(llwidth);
+                //Thread th1;
+                //th1 = new Thread();{
+                    Model Model1 = new Model(th1);
 
-                int timehold = (int) Math.round(modelvars.time_sim);
+                    modelvars passrun = new modelvars();
+                    passrun.passvars(Model1);
 
-                Bitmap bg = Bitmap.createBitmap(llheight, llwidth, Bitmap.Config.ARGB_8888);
-                Canvas canvas = new Canvas(bg);
+                    Paint paint = new Paint();
+                    paint.setColor(Color.parseColor("#FFFFFF"));
 
-                for (int i = 0; i < modelvars.n_cells; i++){
-                    for (int y = 0; y < timehold-1; y++){
-                        float mysize = (float) modelvars.matrix_y;
-                        float mxsize = (float) modelvars.matrix_x;
-                        int holder = i + (y * modelvars.n_cells);
-                        int holder2 = i + ((y + 1) * modelvars.n_cells);
-                        float firstx = (1 - (modelvars.cellxpositions.get(holder).floatValue() / mxsize)) * flheight;
-                        float firsty = (1 - (modelvars.cellypositions.get(holder).floatValue() / mysize)) * flwidth;
-                        float secondx = (1 - (modelvars.cellxpositions.get(holder2).floatValue() / mxsize)) * flheight;
-                        float secondy = (1 - (modelvars.cellypositions.get(holder2).floatValue() / mysize)) * flwidth;
-                        canvas.drawLine(firstx,firsty,secondx,secondy,paint);
+                    LinearLayout ll = (LinearLayout) findViewById(R.id.canmap);
+                    int llheight = ll.getHeight();
+                    int llwidth = ll.getWidth();
+                    Float flheight = new Float(llheight);
+                    Float flwidth = new Float(llwidth);
+
+                    int timehold = (int) Math.round(modelvars.time_sim);
+
+                    Bitmap bg = Bitmap.createBitmap(llheight, llwidth, Bitmap.Config.ARGB_8888);
+                    Canvas canvas = new Canvas(bg);
+
+                    for (int i = 0; i < modelvars.n_cells; i++){
+                        for (int y = 0; y < timehold-1; y++){
+                            float mysize = (float) modelvars.matrix_y;
+                            float mxsize = (float) modelvars.matrix_x;
+                            int holder = i + (y * modelvars.n_cells);
+                            int holder2 = i + ((y + 1) * modelvars.n_cells);
+                            float testing = modelvars.cellxpositions.get(holder).floatValue();
+                            float testing2 = modelvars.cellypositions.get(holder).floatValue();
+                            float firstx = ((modelvars.cellxpositions.get(holder).floatValue() / mxsize)) * flheight;
+                            float firsty = ((modelvars.cellypositions.get(holder).floatValue() / mysize)) * flwidth;
+                            float secondx = ((modelvars.cellxpositions.get(holder2).floatValue() / mxsize)) * flheight;
+                            float secondy = ((modelvars.cellypositions.get(holder2).floatValue() / mysize)) * flwidth;
+                            canvas.drawLine(firstx,firsty,secondx,secondy,paint);
+                        }
                     }
-                }
-                ll.setBackgroundDrawable(new BitmapDrawable(bg));
-            }
+                    modelvars.cellxpositions.clear();
+                    modelvars.cellypositions.clear();
+                    ll.setBackgroundDrawable(new BitmapDrawable(bg));
+            };
         });
-
-    }
+                th1.start();
+    }}
 
 
     /*
