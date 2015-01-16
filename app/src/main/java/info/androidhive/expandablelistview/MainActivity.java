@@ -24,81 +24,92 @@ import android.app.AlertDialog;
 import android.view.LayoutInflater;
 import java.util.Map;
 import android.widget.Button;
-
+import java.util.Random;
+import android.app.Activity;
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.os.Bundle;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
 
 public class MainActivity extends Activity {
 
-	ExpandableListAdapter listAdapter;
-	ExpandableListView expListView;
-	List<String> listDataHeader;
-	HashMap<String, List<String>> listDataChild;
+    ExpandableListAdapter listAdapter;
+    ExpandableListView expListView;
+    List<String> listDataHeader;
+    HashMap<String, List<String>> listDataChild;
     final Context context = this;
-
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-
-		// get the listview
-		expListView = (ExpandableListView) findViewById(R.id.lvExp);
-
-		// preparing list data
-		prepareListData();
-
-		listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
-
-		// setting list adapter
-		expListView.setAdapter(listAdapter);
-
-		// Listview Group click listener
-		expListView.setOnGroupClickListener(new OnGroupClickListener() {
-
-			@Override
-			public boolean onGroupClick(ExpandableListView parent, View v,
-					int groupPosition, long id) {
-				return false;
-			}
-		});
-
-		// Listview Group expanded listener
-		expListView.setOnGroupExpandListener(new OnGroupExpandListener() {
-
-			@Override
-			public void onGroupExpand(int groupPosition) {
-
-			}
-		});
-
-		// Listview Group collasped listener
-		expListView.setOnGroupCollapseListener(new OnGroupCollapseListener() {
-
-			@Override
-			public void onGroupCollapse(int groupPosition) {
+    Random random = new Random();
 
 
-			}
-		});
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-		// Listview on child click listener
-		expListView.setOnChildClickListener(new OnChildClickListener() {
+        setContentView(R.layout.activity_main);
 
-			@Override
-			public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+        // get the listview
+        expListView = (ExpandableListView) findViewById(R.id.lvExp);
+
+        // preparing list data
+        prepareListData();
+
+        listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
+
+        // setting list adapter
+        expListView.setAdapter(listAdapter);
+
+        // Listview Group click listener
+        expListView.setOnGroupClickListener(new OnGroupClickListener() {
+
+            @Override
+            public boolean onGroupClick(ExpandableListView parent, View v,
+                                        int groupPosition, long id) {
+                return false;
+            }
+        });
+
+        // Listview Group expanded listener
+        expListView.setOnGroupExpandListener(new OnGroupExpandListener() {
+
+            @Override
+            public void onGroupExpand(int groupPosition) {
+
+            }
+        });
+
+        // Listview Group collasped listener
+        expListView.setOnGroupCollapseListener(new OnGroupCollapseListener() {
+
+            @Override
+            public void onGroupCollapse(int groupPosition) {
+
+
+            }
+        });
+
+        // Listview on child click listener
+        expListView.setOnChildClickListener(new OnChildClickListener() {
+
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
                 final Map<Integer, String> listsel = new HashMap<Integer, String>();
-                listsel.put(0,"No gradient");
-                listsel.put(1,"C(x,y)");
-                listsel.put(2,"C(x)");
-                listsel.put(3,"C(t)");
-                listsel.put(4,"f(x)");
-                listsel.put(5,"G(x,y)");
-                listsel.put(6,"G(x)");
-                listsel.put(7,"E(t)");
-                listsel.put(8,"E(x)");
-                listsel.put(9,"Stepwise");
-                switch(groupPosition){
+                listsel.put(0, "No gradient");
+                listsel.put(1, "C(x,y)");
+                listsel.put(2, "C(x)");
+                listsel.put(3, "C(t)");
+                listsel.put(4, "f(x)");
+                listsel.put(5, "G(x,y)");
+                listsel.put(6, "G(x)");
+                listsel.put(7, "E(t)");
+                listsel.put(8, "E(x)");
+                listsel.put(9, "Stepwise");
+                switch (groupPosition) {
                     // TODO Auto-generated method stub
                     case 0:
-                        switch(childPosition){
+                        switch (childPosition) {
                             case 0:
                                 LayoutInflater inflater = getLayoutInflater();
                                 final View dialoglayout = inflater.inflate(R.layout.numcell, null);
@@ -252,7 +263,7 @@ public class MainActivity extends Activity {
                         }
                         break;
                     case 1:
-                        switch(childPosition) {
+                        switch (childPosition) {
                             case 0:
                                 LayoutInflater inflater = getLayoutInflater();
                                 final View dialoglayout_matrixsize = inflater.inflate(R.layout.matrixsize, null);
@@ -293,9 +304,9 @@ public class MainActivity extends Activity {
                             case 1:
 
                                 Map<Integer, String> currentsel = new HashMap<Integer, String>();
-                                    currentsel.put(0, "Center");
-                                    currentsel.put(1, "Left center");
-                                    currentsel.put(2, "Custom");
+                                currentsel.put(0, "Center");
+                                currentsel.put(1, "Left center");
+                                currentsel.put(2, "Custom");
                                 final CharSequence[] items = {"Center", "Left center", "Custom"};
                                 builder = new AlertDialog.Builder(context);
                                 builder.setTitle("Select start location\n\tCurrent selection is: " + currentsel.get(modelvars.position_cells));
@@ -315,7 +326,7 @@ public class MainActivity extends Activity {
                                             builder.setTitle("Edit");
                                             // set dialog message
                                             builder
-                                                    .setMessage("Start position in " + modelvars.matrix_x +"X" + modelvars.matrix_y + " matrix")
+                                                    .setMessage("Start position in " + modelvars.matrix_x + "X" + modelvars.matrix_y + " matrix")
                                                     .setCancelable(false)
                                                     .setPositiveButton("OK",
                                                             new DialogInterface.OnClickListener() {
@@ -324,7 +335,7 @@ public class MainActivity extends Activity {
                                                                     EditText mysize_et = (EditText) dialoglayout_startloc.findViewById(R.id.starty_id);
                                                                     double xx = Double.parseDouble(mxsize_et.getText().toString());
                                                                     double yy = Double.parseDouble(mysize_et.getText().toString());
-                                                                    if((xx <= modelvars.matrix_x) && (yy <= modelvars.matrix_y)) {
+                                                                    if ((xx <= modelvars.matrix_x) && (yy <= modelvars.matrix_y)) {
                                                                         modelvars.ini_pos_x = xx;
                                                                         modelvars.ini_pos_y = yy;
                                                                         modelvars.position_cells = 2;
@@ -340,11 +351,11 @@ public class MainActivity extends Activity {
                                                                 }
                                                             });
                                             builder.show();
-                                        }else if(item == 1){
+                                        } else if (item == 1) {
                                             modelvars.ini_pos_x = 0.1;
                                             modelvars.ini_pos_y = modelvars.matrix_y / 2;
                                             modelvars.position_cells = 1;
-                                        }else{
+                                        } else {
                                             modelvars.ini_pos_x = modelvars.matrix_x / 2;
                                             modelvars.ini_pos_y = modelvars.matrix_y / 2;
                                             modelvars.position_cells = 0;
@@ -358,11 +369,11 @@ public class MainActivity extends Activity {
                                 break;
                             case 2:
                                 currentsel = new HashMap<Integer, String>();
-                                    currentsel.put(0, "Right");
-                                    currentsel.put(1, "Up");
-                                    currentsel.put(2, "Left");
-                                    currentsel.put(3, "Down");
-                                    currentsel.put(4, "Random");
+                                currentsel.put(0, "Right");
+                                currentsel.put(1, "Up");
+                                currentsel.put(2, "Left");
+                                currentsel.put(3, "Down");
+                                currentsel.put(4, "Random");
                                 final CharSequence[] items1 = {"Random", "Down", "Left", "Up", "Right"};
                                 builder = new AlertDialog.Builder(context);
                                 builder.setTitle("Select cell orientation\n\tCurrent selection is: " + currentsel.get(modelvars.orient_cells));
@@ -382,20 +393,20 @@ public class MainActivity extends Activity {
 
                     // TODO
                     case 2:
-                        switch(childPosition) {
+                        switch (childPosition) {
                             case 0:
                                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
                                 alertDialogBuilder
                                         .setMessage("Currently selected: " + listsel.get(modelvars.grad_select) + "\nPlease confirm: No gradient\n")
                                         .setCancelable(false)
-                                        .setPositiveButton("Select",new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialog,int id) {
+                                        .setPositiveButton("Select", new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int id) {
                                                 modelvars.grad_select = 0;
                                                 dialog.cancel();
                                             }
                                         })
-                                        .setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialog,int id) {
+                                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int id) {
                                                 dialog.cancel();
                                             }
                                         });
@@ -407,14 +418,14 @@ public class MainActivity extends Activity {
                                 alertDialogBuilder
                                         .setMessage("Currently selected: " + listsel.get(modelvars.grad_select) + "\nPlease confirm: Constant activity C(x,y)\n\t\tC(x,y)=K*C*r/((K_on-Koff)/K-C*r),\n\t\tr^2=(x-Lx/2)^2+(y-Ly/2)^2,\n\t\tK and C dep. on Lx and K_on{off}\n")
                                         .setCancelable(false)
-                                        .setPositiveButton("Select",new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialog,int id) {
+                                        .setPositiveButton("Select", new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int id) {
                                                 modelvars.grad_select = 1;
                                                 dialog.cancel();
                                             }
                                         })
-                                        .setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialog2,int id) {
+                                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog2, int id) {
                                                 dialog2.cancel();
                                             }
                                         });
@@ -427,14 +438,14 @@ public class MainActivity extends Activity {
                                         .setMessage("Currently selected: " + listsel.get(modelvars.grad_select) + "\nPlease confirm: Constant activity C(x)" +
                                                 "\n\t\tC(x)=K*C*x/((K_on-Koff)/K-C*x),\n\t\twhere K and C constant,\n\t\tdep. on Lx and K_on{off}\n")
                                         .setCancelable(false)
-                                        .setPositiveButton("Select",new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialog,int id) {
+                                        .setPositiveButton("Select", new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int id) {
                                                 modelvars.grad_select = 2;
                                                 dialog.cancel();
                                             }
                                         })
-                                        .setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialog2,int id) {
+                                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog2, int id) {
                                                 dialog2.cancel();
                                             }
                                         });
@@ -447,14 +458,14 @@ public class MainActivity extends Activity {
                                         .setMessage("Currently selected: " + listsel.get(modelvars.grad_select) + "\nPlease confirm: Constant activity C(t)" +
                                                 "\n\t\tC(t)=K*C*t/((K_on-Koff)/K-C*t),\n\t\twhere K and C constant,\n\t\tdep. on Lx and K_on{off}\n")
                                         .setCancelable(false)
-                                        .setPositiveButton("Select",new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialog,int id) {
+                                        .setPositiveButton("Select", new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int id) {
                                                 modelvars.grad_select = 3;
                                                 dialog.cancel();
                                             }
                                         })
-                                        .setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialog2,int id) {
+                                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog2, int id) {
                                                 dialog2.cancel();
                                             }
                                         });
@@ -552,7 +563,8 @@ public class MainActivity extends Activity {
 
                                 builder.show();
                                 break;
-                            case 6:inflater = getLayoutInflater();
+                            case 6:
+                                inflater = getLayoutInflater();
                                 final View dialoglayout_g2 = inflater.inflate(R.layout.gausx, null);
                                 builder = new AlertDialog.Builder(context);
                                 builder.setView(dialoglayout_g2);
@@ -691,7 +703,7 @@ public class MainActivity extends Activity {
                         }
                         break;
                     case 3:
-                        switch(childPosition) {
+                        switch (childPosition) {
                             case 0:
                                 LayoutInflater inflater = getLayoutInflater();
                                 final View dialoglayout_nmotors = inflater.inflate(R.layout.nmotor, null);
@@ -812,7 +824,7 @@ public class MainActivity extends Activity {
                                 final Map<Integer, String> currentsel = new HashMap<Integer, String>();
                                 currentsel.put(0, "Liquid");
                                 currentsel.put(1, "Agar");
-                                final CharSequence[] items1 = {"Liquid (3D)","Agar (2D)"};
+                                final CharSequence[] items1 = {"Liquid (3D)", "Agar (2D)"};
                                 builder = new AlertDialog.Builder(context);
                                 builder.setTitle("Select medium\n\tCurrent selection is: " + currentsel.get(modelvars.medium_num));
                                 builder.setItems(items1, new DialogInterface.OnClickListener() {
@@ -830,7 +842,7 @@ public class MainActivity extends Activity {
                                 final Map<Integer, String> currentsel1 = new HashMap<Integer, String>();
                                 currentsel1.put(0, "Reflective");
                                 currentsel1.put(1, "Periodic");
-                                final CharSequence[] items2 = {"Reflective (non-penetrating)","Periodic (penetrating)"};
+                                final CharSequence[] items2 = {"Reflective (non-penetrating)", "Periodic (penetrating)"};
                                 builder = new AlertDialog.Builder(context);
                                 builder.setTitle("Select boundary type\n\tCurrent selection is: " + currentsel1.get(modelvars.bound_select));
                                 builder.setItems(items2, new DialogInterface.OnClickListener() {
@@ -847,7 +859,7 @@ public class MainActivity extends Activity {
                         }
                         break;
                     case 4:
-                        switch(childPosition) {
+                        switch (childPosition) {
                             case 0:
                                 LayoutInflater inflater = getLayoutInflater();
                                 final View dialoglayout_chea = inflater.inflate(R.layout.chea, null);
@@ -1098,7 +1110,7 @@ public class MainActivity extends Activity {
                         }
                         break;
                     case 5:
-                        switch(childPosition) {
+                        switch (childPosition) {
                             case 0:
                                 LayoutInflater inflater = getLayoutInflater();
                                 final View dialoglayout_int = inflater.inflate(R.layout.integration, null);
@@ -1132,7 +1144,7 @@ public class MainActivity extends Activity {
                                 final Map<Integer, String> currentsel1 = new HashMap<Integer, String>();
                                 currentsel1.put(0, "Isotropic");
                                 currentsel1.put(1, "Anisotropic");
-                                final CharSequence[] items1 = {"Isotropic","Anisotropic"};
+                                final CharSequence[] items1 = {"Isotropic", "Anisotropic"};
                                 builder = new AlertDialog.Builder(context);
                                 builder.setTitle("Select tumble model\n\tCurrent selection is: " + currentsel1.get(modelvars.tumble_select));
                                 builder.setItems(items1, new DialogInterface.OnClickListener() {
@@ -1150,7 +1162,7 @@ public class MainActivity extends Activity {
                                 final Map<Integer, String> currentsel2 = new HashMap<Integer, String>();
                                 currentsel2.put(0, "Voting motors");
                                 currentsel2.put(1, "Distortion factor");
-                                final CharSequence[] items2 = {"Voting motors","Distortion factor"};
+                                final CharSequence[] items2 = {"Voting motors", "Distortion factor"};
                                 builder = new AlertDialog.Builder(context);
                                 builder.setTitle("Select run model\n\tCurrent selection is: " + currentsel2.get(modelvars.run_select));
                                 builder.setItems(items2, new DialogInterface.OnClickListener() {
@@ -1168,7 +1180,7 @@ public class MainActivity extends Activity {
                                 final Map<Integer, String> currentsel3 = new HashMap<Integer, String>();
                                 currentsel3.put(0, "T_ccw(CheYp), T_cw is constant");
                                 currentsel3.put(1, "T_ccw(CheYp) and T_cw(CheYp)");
-                                final CharSequence[] items3 = {"T_ccw(CheYp), T_cw is constant","T_ccw(CheYp) and T_cw(CheYp)"};
+                                final CharSequence[] items3 = {"T_ccw(CheYp), T_cw is constant", "T_ccw(CheYp) and T_cw(CheYp)"};
                                 builder = new AlertDialog.Builder(context);
                                 builder.setTitle("Select motor model\n\tCurrent selection is: " + currentsel3.get(modelvars.motor_select));
                                 builder.setItems(items3, new DialogInterface.OnClickListener() {
@@ -1185,9 +1197,9 @@ public class MainActivity extends Activity {
                         }
                         break;
                 }
-				return false;
-			}
-		});
+                return false;
+            }
+        });
 
         final Button reset_button = (Button) findViewById(R.id.reset_id);
         reset_button.setOnClickListener(new View.OnClickListener() {
@@ -1197,15 +1209,66 @@ public class MainActivity extends Activity {
             }
         });
         final Thread th1;
-        th1 = new Thread();{
-        final Button run_button = (Button) findViewById(R.id.runb_id);
-        run_button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
+        th1 = new Thread();
+        {
+            final Button run_button = (Button) findViewById(R.id.runb_id);
+            run_button.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
 
 
-                //Thread th1;
+                    Thread th1;
+                    th1 = new Thread();
+                    {
+                        Model Model1 = new Model(th1);
+                        modelvars passrun = new modelvars();
+                        passrun.passvars(Model1);
+
+
+                    LinearLayout ll = (LinearLayout) findViewById(R.id.llayout);
+                    MySurfaceView sview = (MySurfaceView) findViewById(R.id.canmap);
+                    sview.clearlines();
+                    int llheight = sview.getMeasuredHeight() + 250;
+                    int llwidth = sview.getMeasuredWidth() - 250;
+                    int timehold = (int) Math.round(modelvars.time_sim);
+                    Float flheight = new Float(llheight);
+                    Float flwidth = new Float(llwidth);
+                    float mysize = (float) modelvars.matrix_y;
+                    float mxsize = (float) modelvars.matrix_x;
+                    int cellcolor[] = new int[modelvars.n_cells];
+
+                    for (int y = 0; y < timehold-1; y++) {
+                        for (int i = 0; i < modelvars.n_cells; i++) {
+                            if (y == 0) {
+                                cellcolor[i] = randcolor();
+                            }
+                            //try {
+                            //    Thread.currentThread().sleep(100);
+                           // } catch (InterruptedException e) {
+                            //}
+                            int holder = (y * modelvars.n_cells) + i;
+                            int holder2 = ((y + 1) * modelvars.n_cells) + i;
+                            modelvars.cellxpositions.size();
+                            modelvars.cellypositions.size();
+                            float firstx = ((modelvars.cellxpositions.get(holder).floatValue() / mxsize)) * (flheight);
+                            float firsty = ((modelvars.cellypositions.get(holder).floatValue() / mysize)) * (flwidth);
+                            float secondx = ((modelvars.cellxpositions.get(holder2).floatValue() / mxsize)) * (flheight);
+                            float secondy = ((modelvars.cellypositions.get(holder2).floatValue() / mysize)) * (flwidth);
+                            //for (int rep = 0; rep < 4; rep++) {
+                                sview.plotlines(cellcolor[i], firstx, firsty, secondx, secondy);
+                            //}
+                        }
+                    }}
+                    modelvars.cellxpositions.clear();
+                    modelvars.cellypositions.clear();
+                    th1.start();
+                }
+            });
+        }///
+
+
+                /*///Thread th1;
                 //th1 = new Thread();{
-                    Model Model1 = new Model(th1);
+                 /*   Model Model1 = new Model(th1);
 
                     modelvars passrun = new modelvars();
                     passrun.passvars(Model1);
@@ -1214,20 +1277,14 @@ public class MainActivity extends Activity {
                     paint.setColor(Color.parseColor("#FFFFFF"));
 
                     LinearLayout ll = (LinearLayout) findViewById(R.id.canmap);
-                    int llheight = ll.getHeight();
-                    int llwidth = ll.getWidth();
-                    Float flheight = new Float(llheight);
-                    Float flwidth = new Float(llwidth);
 
-                    int timehold = (int) Math.round(modelvars.time_sim);
 
                     Bitmap bg = Bitmap.createBitmap(llheight, llwidth, Bitmap.Config.ARGB_8888);
                     Canvas canvas = new Canvas(bg);
 
                     for (int i = 0; i < modelvars.n_cells; i++){
                         for (int y = 0; y < timehold-1; y++){
-                            float mysize = (float) modelvars.matrix_y;
-                            float mxsize = (float) modelvars.matrix_x;
+
                             int holder = i + (y * modelvars.n_cells);
                             int holder2 = i + ((y + 1) * modelvars.n_cells);
                             float testing = modelvars.cellxpositions.get(holder).floatValue();
@@ -1236,7 +1293,7 @@ public class MainActivity extends Activity {
                             float firsty = ((modelvars.cellypositions.get(holder).floatValue() / mysize)) * flwidth;
                             float secondx = ((modelvars.cellxpositions.get(holder2).floatValue() / mxsize)) * flheight;
                             float secondy = ((modelvars.cellypositions.get(holder2).floatValue() / mysize)) * flwidth;
-                            canvas.drawLine(firstx,firsty,secondx,secondy,paint);
+
                         }
                     }
                     modelvars.cellxpositions.clear();
@@ -1245,38 +1302,45 @@ public class MainActivity extends Activity {
             };
         });
                 th1.start();
-    }}
+    }*/}
 
+    public int randcolor() {
+        int r = random.nextInt(255);
+        int g = random.nextInt(255);
+        int b = random.nextInt(255);
+        int setcol = 0xff000000 + (r << 16) + (g << 8) + b;
+        return setcol;
+    }
 
     /*
 	 * Preparing the list data
 	 */
-	private void prepareListData() {
-		listDataHeader = new ArrayList<String>();
-		listDataChild = new HashMap<String, List<String>>();
+    private void prepareListData() {
+        listDataHeader = new ArrayList<String>();
+        listDataChild = new HashMap<String, List<String>>();
 
-		// Adding child data
-		listDataHeader.add("Basics");
-		listDataHeader.add("Matrix");
-		listDataHeader.add("Gradient");
+        // Adding child data
+        listDataHeader.add("Basics");
+        listDataHeader.add("Matrix");
+        listDataHeader.add("Gradient");
         listDataHeader.add("Motility");
         listDataHeader.add("Network");
         listDataHeader.add("Algorithm");
 
-		// Adding child data
-		List<String> basiclist = new ArrayList<String>();
-		basiclist.add("Number of cells");
+        // Adding child data
+        List<String> basiclist = new ArrayList<String>();
+        basiclist.add("Number of cells");
         basiclist.add("Time of simulation");
         basiclist.add("Random seed number");
         basiclist.add("Output file - averages");
         basiclist.add("Output file - full dataset");
 
-		List<String> matrixlist = new ArrayList<String>();
+        List<String> matrixlist = new ArrayList<String>();
         matrixlist.add("Matrix size");
         matrixlist.add("Starting position");
         matrixlist.add("Starting orientation");
 
-		List<String> gradientlist = new ArrayList<String>();
+        List<String> gradientlist = new ArrayList<String>();
         gradientlist.add("No gradient");
         gradientlist.add("Constant activity C(x,y)");
         gradientlist.add("Constant activity C(x)");
@@ -1312,12 +1376,13 @@ public class MainActivity extends Activity {
         algolist.add("Motor");
 
         listDataChild.put(listDataHeader.get(0), basiclist); // Header, Child data
-		listDataChild.put(listDataHeader.get(1), matrixlist);
-		listDataChild.put(listDataHeader.get(2), gradientlist);
+        listDataChild.put(listDataHeader.get(1), matrixlist);
+        listDataChild.put(listDataHeader.get(2), gradientlist);
         listDataChild.put(listDataHeader.get(3), motlist);
         listDataChild.put(listDataHeader.get(4), networklist);
         listDataChild.put(listDataHeader.get(5), algolist);
-	}
-
+    }
 
 }
+
+
