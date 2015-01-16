@@ -6,11 +6,6 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -25,14 +20,6 @@ import android.view.LayoutInflater;
 import java.util.Map;
 import android.widget.Button;
 import java.util.Random;
-import android.app.Activity;
-import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.os.Bundle;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
 
 public class MainActivity extends Activity {
 
@@ -1208,101 +1195,70 @@ public class MainActivity extends Activity {
                 resetobject.reset();
             }
         });
-        final Thread th1;
-        th1 = new Thread();
-        {
+
             final Button run_button = (Button) findViewById(R.id.runb_id);
             run_button.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
 
 
-                    Thread th1;
-                    th1 = new Thread();
+                    Thread th2;
+                    th2 = new Thread();
                     {
-                        Model Model1 = new Model(th1);
+                        Model Model1 = new Model(th2);
                         modelvars passrun = new modelvars();
                         passrun.passvars(Model1);
 
 
-                    LinearLayout ll = (LinearLayout) findViewById(R.id.llayout);
-                    MySurfaceView sview = (MySurfaceView) findViewById(R.id.canmap);
-                    sview.clearlines();
-                    int llheight = sview.getMeasuredHeight() + 250;
-                    int llwidth = sview.getMeasuredWidth() - 250;
-                    int timehold = (int) Math.round(modelvars.time_sim);
-                    Float flheight = new Float(llheight);
-                    Float flwidth = new Float(llwidth);
-                    float mysize = (float) modelvars.matrix_y;
-                    float mxsize = (float) modelvars.matrix_x;
-                    int cellcolor[] = new int[modelvars.n_cells];
+                        LinearLayout ll = (LinearLayout) findViewById(R.id.llayout);
+                        MySurfaceView sview = (MySurfaceView) findViewById(R.id.canmap);
 
-                    for (int y = 0; y < timehold-1; y++) {
-                        for (int i = 0; i < modelvars.n_cells; i++) {
-                            if (y == 0) {
-                                cellcolor[i] = randcolor();
+                        int reportllheight = ll.getHeight();
+                        int reportllwidth = ll.getWidth();
+
+
+                        int llheight = sview.getMeasuredHeight() + 250;
+                        int llwidth = sview.getMeasuredWidth() - 250;
+                        int timehold = (int) Math.round(modelvars.time_sim);
+                        Float flheight = new Float(reportllwidth);
+                        Float flwidth = new Float(reportllheight);
+                        float mysize = (float) modelvars.matrix_y;
+                        float mxsize = (float) modelvars.matrix_x;
+                        int cellcolor[] = new int[modelvars.n_cells];
+
+                        for (int y = 0; y < timehold-1; y++) {
+                            for (int i = 0; i < modelvars.n_cells; i++) {
+                                if (y == 0) {
+                                    cellcolor[i] = randcolor();
+                                    if (i == 0){
+                                        for (int rep = 0; rep < 4; rep++) {
+                                            sview.plotlines(cellcolor[i], 0f, 0f, 0f, 0f,0);
+                                        }
+                                    }
+                                }
+                                //try {
+                                //    Thread.currentThread().sleep(100);
+                                // } catch (InterruptedException e) {
+                                //}
+                                int holder = (y * modelvars.n_cells) + i;
+                                int holder2 = ((y + 1) * modelvars.n_cells) + i;
+                                modelvars.cellxpositions.size();
+                                modelvars.cellypositions.size();
+                                float firstx = ((modelvars.cellxpositions.get(holder).floatValue() / mxsize)) * (flheight);
+                                float firsty = ((modelvars.cellypositions.get(holder).floatValue() / mysize)) * (flwidth);
+                                float secondx = ((modelvars.cellxpositions.get(holder2).floatValue() / mxsize)) * (flheight);
+                                float secondy = ((modelvars.cellypositions.get(holder2).floatValue() / mysize)) * (flwidth);
+                                sview.plotlines(cellcolor[i], firstx, firsty, secondx, secondy,1);
+
                             }
-                            //try {
-                            //    Thread.currentThread().sleep(100);
-                           // } catch (InterruptedException e) {
-                            //}
-                            int holder = (y * modelvars.n_cells) + i;
-                            int holder2 = ((y + 1) * modelvars.n_cells) + i;
-                            modelvars.cellxpositions.size();
-                            modelvars.cellypositions.size();
-                            float firstx = ((modelvars.cellxpositions.get(holder).floatValue() / mxsize)) * (flheight);
-                            float firsty = ((modelvars.cellypositions.get(holder).floatValue() / mysize)) * (flwidth);
-                            float secondx = ((modelvars.cellxpositions.get(holder2).floatValue() / mxsize)) * (flheight);
-                            float secondy = ((modelvars.cellypositions.get(holder2).floatValue() / mysize)) * (flwidth);
-                            //for (int rep = 0; rep < 4; rep++) {
-                                sview.plotlines(cellcolor[i], firstx, firsty, secondx, secondy);
-                            //}
-                        }
-                    }}
-                    modelvars.cellxpositions.clear();
-                    modelvars.cellypositions.clear();
-                    th1.start();
-                }
-            });
-        }///
-
-
-                /*///Thread th1;
-                //th1 = new Thread();{
-                 /*   Model Model1 = new Model(th1);
-
-                    modelvars passrun = new modelvars();
-                    passrun.passvars(Model1);
-
-                    Paint paint = new Paint();
-                    paint.setColor(Color.parseColor("#FFFFFF"));
-
-                    LinearLayout ll = (LinearLayout) findViewById(R.id.canmap);
-
-
-                    Bitmap bg = Bitmap.createBitmap(llheight, llwidth, Bitmap.Config.ARGB_8888);
-                    Canvas canvas = new Canvas(bg);
-
-                    for (int i = 0; i < modelvars.n_cells; i++){
-                        for (int y = 0; y < timehold-1; y++){
-
-                            int holder = i + (y * modelvars.n_cells);
-                            int holder2 = i + ((y + 1) * modelvars.n_cells);
-                            float testing = modelvars.cellxpositions.get(holder).floatValue();
-                            float testing2 = modelvars.cellypositions.get(holder).floatValue();
-                            float firstx = ((modelvars.cellxpositions.get(holder).floatValue() / mxsize)) * flheight;
-                            float firsty = ((modelvars.cellypositions.get(holder).floatValue() / mysize)) * flwidth;
-                            float secondx = ((modelvars.cellxpositions.get(holder2).floatValue() / mxsize)) * flheight;
-                            float secondy = ((modelvars.cellypositions.get(holder2).floatValue() / mysize)) * flwidth;
-
                         }
                     }
                     modelvars.cellxpositions.clear();
                     modelvars.cellypositions.clear();
-                    ll.setBackgroundDrawable(new BitmapDrawable(bg));
-            };
-        });
-                th1.start();
-    }*/}
+                    th2.start();
+                }
+            }
+        );
+    }
 
     public int randcolor() {
         int r = random.nextInt(255);

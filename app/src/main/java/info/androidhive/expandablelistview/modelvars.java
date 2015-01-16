@@ -20,8 +20,8 @@ import android.widget.Button;
 
 public class modelvars {
 
-    public static double time_sim = 500, matrix_x = 20, matrix_y = 20, ini_pos_x = 10, ini_pos_y = 10, source_x = 10, source_y = 10, att_max = 0.1, att_min = 0, att_rate = 0.001, g_sigma = 5, step_val = 0.03, add_step = 5, rem_step = 350, diff_const = 0.062, cell_velocity = 20, rest_rate = 0.65, chez = 100, zphos = 30, chey = 100, yphos = 100, cheb = 100, bcat = 0.0364, cher = 100, rcat = 0.0182, precision = 100, adapt_rate = 1, chea = 100, autophos = 5, tar_off = 0.02, tar_on = 0.5, tsr_off = 100, tsr_on = 1000000, ini_methyl =0.924, integration_rate = 0.01;
-    public static int n_cells = 1, position_cells = 0, orient_cells = 4, grad_select = 0, medium_num = 0, bound_select = 0, n_motors = 5, tar_num = 6, tsr_num = 12, tumble_select = 0, run_select = 0, motor_select = 0;
+    public static double time_sim = 500, matrix_x = 2, matrix_y = 2, ini_pos_x = 1, ini_pos_y = 1, source_x = 1, source_y = 1, att_max = 0.1, att_min = 0, att_rate = 0.001, g_sigma = 5, step_val = 0.03, add_step = 5, rem_step = 350, diff_const = 0.062, cell_velocity = 20, rest_rate = 0.65, chez = 100, zphos = 30, chey = 100, yphos = 100, cheb = 100, bcat = 0.0364, cher = 100, rcat = 0.0182, precision = 100, adapt_rate = 1, chea = 100, autophos = 5, tar_off = 0.02, tar_on = 0.5, tsr_off = 100, tsr_on = 1000000, ini_methyl =0.924, integration_rate = 0.01;
+    public static int n_cells = 5, position_cells = 0, orient_cells = 4, grad_select = 0, medium_num = 0, bound_select = 0, n_motors = 5, tar_num = 6, tsr_num = 12, tumble_select = 0, run_select = 0, motor_select = 0;
     public static long rand_seed = 3;
     public static String avgname = "averages.out", fullname = "individuals.out";
 
